@@ -25,7 +25,7 @@ Route::get('Route2', function(){
 Route::get('Callname',function(){
     return redirect()->route('MyRoute2');
 });
-Route::group(['middleware'=>'Mygroup'],function(){
+Route::group(['prefix'=>'Mygroup'],function(){
    Route::get('User1',function(){
        echo "User1";
    }) ;
