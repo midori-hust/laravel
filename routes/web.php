@@ -25,6 +25,7 @@ Route::get('Route2', function(){
 Route::get('Callname',function(){
     return redirect()->route('MyRoute2');
 });
+
 Route::group(['prefix'=>'Mygroup'],function(){
    Route::get('User1',function(){
        echo "User1";
@@ -35,5 +36,36 @@ Route::group(['prefix'=>'Mygroup'],function(){
    Route::get('User3',function(){
        echo 'User3';
    });
-   
 });
+Route::get('hello/{user}',function($user){
+    return view('hello',compact('user'));
+});
+Route::get('testblade',function(){
+    return view('test');
+});
+
+Route::get('call-view',function(){
+    return view('home');
+});
+
+Route::get('call-controller/{name}/{age}','homecontroller@index')
+->where(['name'=>'[a-zA-Z]+','age'=>'[0-9]+']);
+
+Route::get('/',function(){
+    $data=DB::table('todolist')->where('id','<>',1)->Where('type',1)->get();
+    print_r($data);
+});
+Route::get('/join',function(){
+    $data=DB::table('todolist')->leftjoin('detail','todolist.id','=','detail.work_id')->get();
+    print_r($data);
+});
+
+Route::get('modeltest','homecontroller@modeltest');
+
+Route::get('collectiontest','homecontroller@test_collection');
+
+Route::get('get-form', 'handleController@getForm');
+Route::post('handle-form','handleController@handleRequest');
+
+Route::get('file', 'FileController@index');
+Route::post('file', 'FileController@doUpload');
