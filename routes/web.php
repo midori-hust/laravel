@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login', function(){
+    return view('login');
+});
+
+Route::post('/login_auth', 'AuthController@login')->name('login_auth');
+Route::get('/logout', 'AuthController@logout');
